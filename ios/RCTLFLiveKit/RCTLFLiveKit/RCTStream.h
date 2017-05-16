@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <React/RCTView.h>
 
 @class RCTStreamManager;
 

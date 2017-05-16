@@ -21,17 +21,6 @@ RCT_EXPORT_MODULE();
     return [[RCTStream alloc] initWithManager:self bridge:self.bridge];
 }
 
-- (NSArray *) customDirectEventTypes
-{
-    return @[
-             @"onReady",
-             @"onPending",
-             @"onStart",
-             @"onError",
-             @"onStop"
-            ];
-}
-
 - (dispatch_queue_t)methodQueue
 {
     return dispatch_get_main_queue();
@@ -41,5 +30,10 @@ RCT_EXPORT_VIEW_PROPERTY(started, BOOL);
 RCT_EXPORT_VIEW_PROPERTY(cameraFronted, BOOL);
 RCT_EXPORT_VIEW_PROPERTY(url, NSString);
 RCT_EXPORT_VIEW_PROPERTY(landscape, BOOL);
+RCT_EXPORT_VIEW_PROPERTY(onReady, RCTBubblingEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onPending, RCTBubblingEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onStart, RCTBubblingEventBlock);
+//RCT_EXPORT_VIEW_PROPERTY(onError, RCTBubblingEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onStop, RCTBubblingEventBlock);
 
 @end
