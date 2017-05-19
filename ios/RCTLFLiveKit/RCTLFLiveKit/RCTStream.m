@@ -27,7 +27,7 @@
 @property (nonatomic, copy) RCTBubblingEventBlock onReady;
 @property (nonatomic, copy) RCTBubblingEventBlock onPending;
 @property (nonatomic, copy) RCTBubblingEventBlock onStart;
-@property (nonatomic, copy) RCTBubblingEventBlock onError;
+@property (nonatomic, copy) RCTBubblingEventBlock onStreamError;
 @property (nonatomic, copy) RCTBubblingEventBlock onStop;
 
 @end
@@ -156,7 +156,7 @@
             self.onStart(@{@"target": self.reactTag});
             break;
         case LFLiveError:
-            self.onError(@{@"target": self.reactTag});
+            self.onStreamError(@{@"target": self.reactTag});
             break;
         case LFLiveStop:
             self.onStop(@{@"target": self.reactTag});

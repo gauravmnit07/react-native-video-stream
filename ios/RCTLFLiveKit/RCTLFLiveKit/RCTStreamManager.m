@@ -33,7 +33,7 @@ RCT_EXPORT_VIEW_PROPERTY(landscape, BOOL);
 RCT_EXPORT_VIEW_PROPERTY(onReady, RCTBubblingEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onPending, RCTBubblingEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onStart, RCTBubblingEventBlock);
-//RCT_EXPORT_VIEW_PROPERTY(onError, RCTBubblingEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onStreamError, RCTBubblingEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onStop, RCTBubblingEventBlock);
 
 @end
