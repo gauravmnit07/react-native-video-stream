@@ -11,6 +11,16 @@
 #import <React/RCTEventDispatcher.h>
 #import <React/UIView+React.h>
 
+@interface RCTPlayer ()
+
+@property (nonatomic, copy) RCTBubblingEventBlock onLoading;
+@property (nonatomic, copy) RCTBubblingEventBlock onPaused;
+@property (nonatomic, copy) RCTBubblingEventBlock onShutdown;
+@property (nonatomic, copy) RCTBubblingEventBlock onStreamError;
+@property (nonatomic, copy) RCTBubblingEventBlock onPlaying;
+
+@end
+
 @implementation RCTPlayer{
     RCTEventDispatcher *_eventDispatcher;
     PLPlayer *_plplayer;
@@ -119,19 +129,19 @@ static NSString *status[] = {
     //TODO - send event
     switch (state) {
         case PLPlayerStatusCaching:
-            [_eventDispatcher sendInputEventWithName:@"onLoading" body:@{@"target": self.reactTag}];
+            self.onLoading(@{@"target": self.reactTag});
             break;
         case PLPlayerStatusPlaying:
-            [_eventDispatcher sendInputEventWithName:@"onPlaying" body:@{@"target": self.reactTag}];
+            self.onPlaying(@{@"target": self.reactTag});
             break;
         case PLPlayerStatusPaused:
-            [_eventDispatcher sendInputEventWithName:@"onPaused" body:@{@"target": self.reactTag}];
+            self.onPaused(@{@"target": self.reactTag});
             break;
         case PLPlayerStatusStopped:
-            [_eventDispatcher sendInputEventWithName:@"onShutdown" body:@{@"target": self.reactTag}];
+            self.onShutdown(@{@"target": self.reactTag});
             break;
         case PLPlayerStatusError:
-            [_eventDispatcher sendInputEventWithName:@"onError" body:@{@"target": self.reactTag , @"errorCode": [NSNumber numberWithUnsignedInt:0]}];
+            self.onStreamError(@{@"target": self.reactTag});
             break;
         default:
             break;

@@ -19,17 +19,6 @@ RCT_EXPORT_MODULE();
     return [[RCTPlayer alloc] initWithEventDispatcher:self.bridge.eventDispatcher];
 }
 
-- (NSArray *)customDirectEventTypes
-{
-    return @[
-             @"onLoading",
-             @"onPaused",
-             @"onShutdown",
-             @"onError",
-             @"onPlaying"
-             ];
-}
-
 - (dispatch_queue_t)methodQueue
 {
     return dispatch_get_main_queue();
@@ -38,6 +27,11 @@ RCT_EXPORT_MODULE();
 RCT_EXPORT_VIEW_PROPERTY(source, NSDictionary);
 RCT_EXPORT_VIEW_PROPERTY(started, BOOL);
 RCT_EXPORT_VIEW_PROPERTY(muted, BOOL);
+RCT_EXPORT_VIEW_PROPERTY(onLoading, RCTBubblingEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onPaused, RCTBubblingEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onShutdown, RCTBubblingEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onStreamError, RCTBubblingEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onPlaying, RCTBubblingEventBlock);
 
 
 @end
