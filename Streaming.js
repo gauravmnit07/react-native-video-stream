@@ -34,6 +34,20 @@ class Stream extends Component {
 		cameraFronted: PropTypes.bool,
 		url: PropTypes.string.isRequired,
 		landscape: PropTypes.bool.isRequired,
+		videoConfig:PropTypes.shape({
+	    videoBitRate: PropTypes.number,
+	    videoMaxBitRate: PropTypes.number,
+	    videoMinBitRate: PropTypes.number,
+	    videoFrameRate: PropTypes.number,
+	    videoMaxFrameRate: PropTypes.number,
+	    videoMinFrameRate: PropTypes.number,
+	    sessionPreset: PropTypes.oneOf([0, 1, 2]), // SessionPreset360x640 = 0, SessionPreset540x960 = 1, SessionPreset720x1280 = 2
+	  }),
+	  audioConfig:PropTypes.shape({
+	    numberOfChannels: PropTypes.number,
+	    audioSampleRate: PropTypes.number,
+	    audioBitRate: PropTypes.number,
+	  }),
 
 		onReady: PropTypes.func,
 		onPending: PropTypes.func,
