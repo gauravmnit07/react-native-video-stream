@@ -12,6 +12,7 @@
 #import "RCTStream.h"
 #import "RCTStreamManager.h"
 #import <React/RCTLog.h>
+#import <React/RCTConvert.h>
 #import <React/RCTUtils.h>
 #import <React/RCTEventDispatcher.h>
 #import <React/UIView+React.h>
@@ -36,6 +37,8 @@
     bool _started;
     bool _cameraFronted;
     NSString *_url;
+    NSDictionary *_videoConfig;
+    NSDictionary *_audioConfig;
     bool _landscape;
 }
 
@@ -177,7 +180,8 @@
         
         
         /***   默认分辨率368 ＊ 640  音频：44.1 iphone6以上48  双声道  方向竖屏 ***/
-        _session = [[LFLiveSession alloc] initWithAudioConfiguration:[LFLiveAudioConfiguration defaultConfiguration] videoConfiguration:[LFLiveVideoConfiguration defaultConfigurationForQuality:LFLiveVideoQuality_Low3 landscape:_landscape]];
+        
+        _session = [[LFLiveSession alloc] initWithAudioConfiguration:[self getAudioConfiguration] videoConfiguration:[self getVideoConfiguration]];
         
         /**    自己定制单声道  */
         /*
@@ -319,8 +323,93 @@
     _url = url;
 }
 
+- (void) setVideoConfig: (NSDictionary *) videoConfig {
+    _videoConfig = videoConfig;
+}
+
+- (void) setAudioConfig: (NSDictionary *) audioConfig {
+    _audioConfig = audioConfig;
+}
+
+
 - (void) setLandscape: (BOOL) landscape{
     _landscape = landscape;
+}
+
+
+- (LFLiveVideoConfiguration *)getVideoConfiguration {
+    LFLiveVideoConfiguration *videoConfig = [LFLiveVideoConfiguration defaultConfigurationForQuality:LFLiveVideoQuality_Low1 landscape:_landscape];
+    if (_videoConfig.count == 0) {
+        videoConfig.videoBitRate =  500 * 1024;
+        videoConfig.videoMaxBitRate = 500 * 1024;
+        videoConfig.videoMinBitRate = 500 * 1024;
+        return videoConfig;
+    }
+    
+    NSUInteger videoBitRate = [RCTConvert NSUInteger:_videoConfig[@"videoBitRate"]];
+    if (videoBitRate == 0) {
+        videoBitRate = 500 * 1024;
+    }
+    NSUInteger videoMaxBitRate = [RCTConvert NSUInteger:_videoConfig[@"videoMaxBitRate"]];
+    if (videoMaxBitRate == 0) {
+        videoMaxBitRate = videoBitRate;
+    }
+    NSUInteger videoMinBitRate = [RCTConvert NSUInteger:_videoConfig[@"videoMinBitRate"]];
+    if (videoMinBitRate == 0) {
+        videoMinBitRate = videoBitRate;
+    }
+    NSUInteger videoFrameRate = [RCTConvert NSUInteger:_videoConfig[@"videoFrameRate"]];
+    if (videoFrameRate == 0) {
+        videoFrameRate = 15;
+    }
+    NSUInteger videoMaxFrameRate = [RCTConvert NSUInteger:_videoConfig[@"videoMaxFrameRate"]];
+    if (videoMaxFrameRate == 0) {
+        videoMaxFrameRate = videoFrameRate;
+    }
+    NSUInteger videoMinFrameRate = [RCTConvert NSUInteger:_videoConfig[@"videoMinFrameRate"]];
+    if (videoMinFrameRate == 0) {
+        videoMinFrameRate = videoFrameRate > 15 ? videoFrameRate : 10;
+    }
+    NSUInteger sessionPreset = [RCTConvert NSUInteger:_videoConfig[@"sessionPreset"]];
+    if (sessionPreset == 0) {
+        sessionPreset = LFCaptureSessionPreset360x640;
+    } else if (sessionPreset > 2) {
+        sessionPreset = LFCaptureSessionPreset720x1280;
+    }
+    
+    videoConfig.videoBitRate =  videoBitRate;
+    videoConfig.videoMaxBitRate = videoMaxBitRate;
+    videoConfig.videoMinBitRate = videoMinBitRate;
+    videoConfig.videoFrameRate = videoFrameRate;
+    videoConfig.videoMaxFrameRate = videoMaxFrameRate;
+    videoConfig.videoMinFrameRate = videoMinFrameRate;
+    videoConfig.sessionPreset = sessionPreset;
+    return videoConfig;
+}
+
+- (LFLiveAudioConfiguration *)getAudioConfiguration {
+    LFLiveAudioConfiguration *audioConfig = [LFLiveAudioConfiguration defaultConfiguration];
+    if (_audioConfig.count == 0) {
+        return audioConfig;
+    }
+    
+    NSUInteger numberOfChannels = [RCTConvert NSUInteger:_audioConfig[@"numberOfChannels"]];
+    if (numberOfChannels == 0) {
+        numberOfChannels = 2;
+    }
+    NSUInteger audioSampleRate = [RCTConvert NSUInteger:_audioConfig[@"audioSampleRate"]];
+    if (audioSampleRate == 0) {
+        audioSampleRate = LFLiveAudioSampleRate_48000Hz;
+    }
+    NSUInteger audioBitRate = [RCTConvert NSUInteger:_audioConfig[@"audioBitRate"]];
+    if (audioBitRate == 0) {
+        audioBitRate = LFLiveAudioBitRate_64Kbps;
+    }
+    
+    audioConfig.numberOfChannels =  numberOfChannels;
+    audioConfig.audioSampleRate = audioSampleRate;
+    audioConfig.audioBitrate = audioBitRate;
+    return audioConfig;
 }
 
 @end

@@ -66,6 +66,20 @@ Player.propTypes = {
   }).isRequired,
   started:PropTypes.bool,
   muted:PropTypes.bool, //iOS only
+  videoConfig:PropTypes.shape({
+    videoBitRate: PropTypes.number,
+    videoMaxBitRate: PropTypes.number,
+    videoMinBitRate: PropTypes.number,
+    videoFrameRate: PropTypes.number,
+    videoMaxFrameRate: PropTypes.number,
+    videoMinFrameRate: PropTypes.number,
+    sessionPreset: PropTypes.oneOf([0, 1, 2]), // SessionPreset360x640 = 0, SessionPreset540x960 = 1, SessionPreset720x1280 = 2
+  }),
+  audioConfig:PropTypes.shape({
+    numberOfChannels: PropTypes.number,
+    audioSampleRate: PropTypes.number,
+    audioBitRate: PropTypes.number,
+  }),
 
   onLoading: PropTypes.func,
   onPaused: PropTypes.func,

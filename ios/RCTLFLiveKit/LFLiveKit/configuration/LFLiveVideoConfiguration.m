@@ -9,6 +9,8 @@
 #import "LFLiveVideoConfiguration.h"
 #import <AVFoundation/AVFoundation.h>
 
+#define kBytesInKiloBytes 1024;
+
 
 @implementation LFLiveVideoConfiguration
 
@@ -32,9 +34,9 @@
         configuration.videoFrameRate = 15;
         configuration.videoMaxFrameRate = 15;
         configuration.videoMinFrameRate = 10;
-        configuration.videoBitRate = 500 * 1000;
-        configuration.videoMaxBitRate = 600 * 1000;
-        configuration.videoMinBitRate = 400 * 1000;
+        configuration.videoBitRate = 500 * kBytesInKiloBytes;
+        configuration.videoMaxBitRate = 600 * kBytesInKiloBytes;
+        configuration.videoMinBitRate = 400 * kBytesInKiloBytes;
         configuration.videoSize = CGSizeMake(360, 640);
     }
         break;
@@ -43,9 +45,9 @@
         configuration.videoFrameRate = 24;
         configuration.videoMaxFrameRate = 24;
         configuration.videoMinFrameRate = 12;
-        configuration.videoBitRate = 600 * 1000;
-        configuration.videoMaxBitRate = 720 * 1000;
-        configuration.videoMinBitRate = 500 * 1000;
+        configuration.videoBitRate = 600 * kBytesInKiloBytes;
+        configuration.videoMaxBitRate = 720 * kBytesInKiloBytes;
+        configuration.videoMinBitRate = 500 * kBytesInKiloBytes;
         configuration.videoSize = CGSizeMake(360, 640);
     }
         break;
@@ -54,9 +56,9 @@
         configuration.videoFrameRate = 30;
         configuration.videoMaxFrameRate = 30;
         configuration.videoMinFrameRate = 15;
-        configuration.videoBitRate = 800 * 1000;
-        configuration.videoMaxBitRate = 960 * 1000;
-        configuration.videoMinBitRate = 600 * 1000;
+        configuration.videoBitRate = 800 * kBytesInKiloBytes;
+        configuration.videoMaxBitRate = 960 * kBytesInKiloBytes;
+        configuration.videoMinBitRate = 600 * kBytesInKiloBytes;
         configuration.videoSize = CGSizeMake(360, 640);
     }
         break;
@@ -65,9 +67,9 @@
         configuration.videoFrameRate = 15;
         configuration.videoMaxFrameRate = 15;
         configuration.videoMinFrameRate = 10;
-        configuration.videoBitRate = 800 * 1000;
-        configuration.videoMaxBitRate = 960 * 1000;
-        configuration.videoMinBitRate = 500 * 1000;
+        configuration.videoBitRate = 800 * kBytesInKiloBytes;
+        configuration.videoMaxBitRate = 960 * kBytesInKiloBytes;
+        configuration.videoMinBitRate = 500 * kBytesInKiloBytes;
         configuration.videoSize = CGSizeMake(540, 960);
     }
         break;
@@ -76,9 +78,9 @@
         configuration.videoFrameRate = 24;
         configuration.videoMaxFrameRate = 24;
         configuration.videoMinFrameRate = 12;
-        configuration.videoBitRate = 800 * 1000;
-        configuration.videoMaxBitRate = 960 * 1000;
-        configuration.videoMinBitRate = 500 * 1000;
+        configuration.videoBitRate = 800 * kBytesInKiloBytes;
+        configuration.videoMaxBitRate = 960 * kBytesInKiloBytes;
+        configuration.videoMinBitRate = 500 * kBytesInKiloBytes;
         configuration.videoSize = CGSizeMake(540, 960);
     }
         break;
@@ -87,9 +89,9 @@
         configuration.videoFrameRate = 30;
         configuration.videoMaxFrameRate = 30;
         configuration.videoMinFrameRate = 15;
-        configuration.videoBitRate = 1000 * 1000;
-        configuration.videoMaxBitRate = 1200 * 1000;
-        configuration.videoMinBitRate = 500 * 1000;
+        configuration.videoBitRate = 1000 * kBytesInKiloBytes;
+        configuration.videoMaxBitRate = 1200 * kBytesInKiloBytes;
+        configuration.videoMinBitRate = 500 * kBytesInKiloBytes;
         configuration.videoSize = CGSizeMake(540, 960);
     }
         break;
@@ -98,9 +100,9 @@
         configuration.videoFrameRate = 15;
         configuration.videoMaxFrameRate = 15;
         configuration.videoMinFrameRate = 10;
-        configuration.videoBitRate = 1000 * 1000;
-        configuration.videoMaxBitRate = 1200 * 1000;
-        configuration.videoMinBitRate = 500 * 1000;
+        configuration.videoBitRate = 1000 * kBytesInKiloBytes;
+        configuration.videoMaxBitRate = 1200 * kBytesInKiloBytes;
+        configuration.videoMinBitRate = 500 * kBytesInKiloBytes;
         configuration.videoSize = CGSizeMake(720, 1280);
     }
         break;
@@ -109,9 +111,9 @@
         configuration.videoFrameRate = 24;
         configuration.videoMaxFrameRate = 24;
         configuration.videoMinFrameRate = 12;
-        configuration.videoBitRate = 1200 * 1000;
-        configuration.videoMaxBitRate = 1440 * 1000;
-        configuration.videoMinBitRate = 800 * 1000;
+        configuration.videoBitRate = 1200 * kBytesInKiloBytes;
+        configuration.videoMaxBitRate = 1440 * kBytesInKiloBytes;
+        configuration.videoMinBitRate = 800 * kBytesInKiloBytes;
         configuration.videoSize = CGSizeMake(720, 1280);
     }
         break;
@@ -120,9 +122,9 @@
         configuration.videoFrameRate = 30;
         configuration.videoMaxFrameRate = 30;
         configuration.videoMinFrameRate = 15;
-        configuration.videoBitRate = 1200 * 1000;
-        configuration.videoMaxBitRate = 1440 * 1000;
-        configuration.videoMinBitRate = 500 * 1000;
+        configuration.videoBitRate = 1200 * kBytesInKiloBytes;
+        configuration.videoMaxBitRate = 1440 * kBytesInKiloBytes;
+        configuration.videoMinBitRate = 500 * kBytesInKiloBytes;
         configuration.videoSize = CGSizeMake(720, 1280);
     }
         break;
