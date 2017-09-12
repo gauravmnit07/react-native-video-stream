@@ -29,7 +29,7 @@
 @property (nonatomic, copy) RCTBubblingEventBlock onPending;
 @property (nonatomic, copy) RCTBubblingEventBlock onStart;
 @property (nonatomic, copy) RCTBubblingEventBlock onStreamError;
-@property (nonatomic, copy) RCTBubblingEventBlock onStop;
+@property (nonatomic, copy) RCTBubblingEventBlock onStreamingStopped;
 
 @end
 
@@ -62,7 +62,7 @@
     }
     [super removeFromSuperview];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
-    
+
     //[UIApplication sharedApplication].idleTimerDisabled = _previousIdleTimerDisabled;
 }
 
@@ -78,15 +78,15 @@
         [self addSubview:self.containerView];
 //
 //        [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-//        
+//
 //        NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
 //        NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
 //        NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0];
 //        NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0];
-//        
+//
 //        NSArray *constraints = [NSArray arrayWithObjects:centerX, centerY,width,height, nil];
 //        [self addConstraints: constraints];
-        
+
         //[self.containerView addSubview:self.startLiveButton];
     }
     return self;
@@ -118,7 +118,7 @@
         case AVAuthorizationStatusDenied:
         case AVAuthorizationStatusRestricted:
             // 用户明确地拒绝授权，或者相机设备无法访问
-            
+
             break;
         default:
             break;
@@ -162,7 +162,7 @@
             self.onStreamError(@{@"target": self.reactTag});
             break;
         case LFLiveStop:
-            self.onStop(@{@"target": self.reactTag});
+            self.onStreamingStopped(@{@"target": self.reactTag});
             break;
         default:
             break;
@@ -177,12 +177,12 @@
         /**      发现大家有不会用横屏的请注意啦，横屏需要在ViewController  supportedInterfaceOrientations修改方向  默认竖屏  ****/
         /**      发现大家有不会用横屏的请注意啦，横屏需要在ViewController  supportedInterfaceOrientations修改方向  默认竖屏  ****/
         /**      发现大家有不会用横屏的请注意啦，横屏需要在ViewController  supportedInterfaceOrientations修改方向  默认竖屏  ****/
-        
-        
+
+
         /***   默认分辨率368 ＊ 640  音频：44.1 iphone6以上48  双声道  方向竖屏 ***/
-        
+
         _session = [[LFLiveSession alloc] initWithAudioConfiguration:[self getAudioConfiguration] videoConfiguration:[self getVideoConfiguration]];
-        
+
         /**    自己定制单声道  */
         /*
          LFLiveAudioConfiguration *audioConfiguration = [LFLiveAudioConfiguration new];
@@ -191,7 +191,7 @@
          audioConfiguration.audioSampleRate = LFLiveAudioSampleRate_44100Hz;
          _session = [[LFLiveSession alloc] initWithAudioConfiguration:audioConfiguration videoConfiguration:[LFLiveVideoConfiguration defaultConfiguration]];
          */
-        
+
         /**    自己定制高质量音频96K */
         /*
          LFLiveAudioConfiguration *audioConfiguration = [LFLiveAudioConfiguration new];
@@ -200,15 +200,15 @@
          audioConfiguration.audioSampleRate = LFLiveAudioSampleRate_44100Hz;
          _session = [[LFLiveSession alloc] initWithAudioConfiguration:audioConfiguration videoConfiguration:[LFLiveVideoConfiguration defaultConfiguration]];
          */
-        
+
         /**    自己定制高质量音频96K 分辨率设置为540*960 方向竖屏 */
-        
+
         /*
          LFLiveAudioConfiguration *audioConfiguration = [LFLiveAudioConfiguration new];
          audioConfiguration.numberOfChannels = 2;
          audioConfiguration.audioBitrate = LFLiveAudioBitRate_96Kbps;
          audioConfiguration.audioSampleRate = LFLiveAudioSampleRate_44100Hz;
-         
+
          LFLiveVideoConfiguration *videoConfiguration = [LFLiveVideoConfiguration new];
          videoConfiguration.videoSize = CGSizeMake(540, 960);
          videoConfiguration.videoBitRate = 800*1024;
@@ -218,19 +218,19 @@
          videoConfiguration.videoMaxKeyframeInterval = 48;
          videoConfiguration.orientation = UIInterfaceOrientationPortrait;
          videoConfiguration.sessionPreset = LFCaptureSessionPreset540x960;
-         
+
          _session = [[LFLiveSession alloc] initWithAudioConfiguration:audioConfiguration videoConfiguration:videoConfiguration];
          */
-        
-        
+
+
         /**    自己定制高质量音频128K 分辨率设置为720*1280 方向竖屏 */
-        
+
         /*
          LFLiveAudioConfiguration *audioConfiguration = [LFLiveAudioConfiguration new];
          audioConfiguration.numberOfChannels = 2;
          audioConfiguration.audioBitrate = LFLiveAudioBitRate_128Kbps;
          audioConfiguration.audioSampleRate = LFLiveAudioSampleRate_44100Hz;
-         
+
          LFLiveVideoConfiguration *videoConfiguration = [LFLiveVideoConfiguration new];
          videoConfiguration.videoSize = CGSizeMake(720, 1280);
          videoConfiguration.videoBitRate = 800*1024;
@@ -240,19 +240,19 @@
          videoConfiguration.videoMaxKeyframeInterval = 30;
          videoConfiguration.landscape = NO;
          videoConfiguration.sessionPreset = LFCaptureSessionPreset360x640;
-         
+
          _session = [[LFLiveSession alloc] initWithAudioConfiguration:audioConfiguration videoConfiguration:videoConfiguration];
          */
-        
-        
+
+
         /**    自己定制高质量音频128K 分辨率设置为720*1280 方向横屏  */
-        
+
         /*
          LFLiveAudioConfiguration *audioConfiguration = [LFLiveAudioConfiguration new];
          audioConfiguration.numberOfChannels = 2;
          audioConfiguration.audioBitrate = LFLiveAudioBitRate_128Kbps;
          audioConfiguration.audioSampleRate = LFLiveAudioSampleRate_44100Hz;
-         
+
          LFLiveVideoConfiguration *videoConfiguration = [LFLiveVideoConfiguration new];
          videoConfiguration.videoSize = CGSizeMake(1280, 720);
          videoConfiguration.videoBitRate = 800*1024;
@@ -262,10 +262,10 @@
          videoConfiguration.videoMaxKeyframeInterval = 30;
          videoConfiguration.landscape = YES;
          videoConfiguration.sessionPreset = LFCaptureSessionPreset720x1280;
-         
+
          _session = [[LFLiveSession alloc] initWithAudioConfiguration:audioConfiguration videoConfiguration:videoConfiguration];
          */
-        
+
         _session.delegate = self;
         _session.showDebugInfo = YES;
         _session.preView = self;
@@ -276,7 +276,7 @@
         //        imageView.frame = CGRectMake(100, 100, 29, 29);
         //        imageView.image = [UIImage imageNamed:@"ios-29x29"];
         //        _session.warterMarkView = imageView;
-        //        
+        //
     }
     return _session;
 }
@@ -345,7 +345,7 @@
         videoConfig.videoMinBitRate = 500 * 1024;
         return videoConfig;
     }
-    
+
     NSUInteger videoBitRate = [RCTConvert NSUInteger:_videoConfig[@"videoBitRate"]];
     if (videoBitRate == 0) {
         videoBitRate = 500 * 1024;
@@ -376,7 +376,7 @@
     } else if (sessionPreset > 2) {
         sessionPreset = LFCaptureSessionPreset720x1280;
     }
-    
+
     videoConfig.videoBitRate =  videoBitRate;
     videoConfig.videoMaxBitRate = videoMaxBitRate;
     videoConfig.videoMinBitRate = videoMinBitRate;
@@ -392,7 +392,7 @@
     if (_audioConfig.count == 0) {
         return audioConfig;
     }
-    
+
     NSUInteger numberOfChannels = [RCTConvert NSUInteger:_audioConfig[@"numberOfChannels"]];
     if (numberOfChannels == 0) {
         numberOfChannels = 2;
@@ -405,7 +405,7 @@
     if (audioBitRate == 0) {
         audioBitRate = LFLiveAudioBitRate_64Kbps;
     }
-    
+
     audioConfig.numberOfChannels =  numberOfChannels;
     audioConfig.audioSampleRate = audioSampleRate;
     audioConfig.audioBitrate = audioBitRate;

@@ -36,6 +36,6 @@ RCT_EXPORT_VIEW_PROPERTY(onReady, RCTBubblingEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onPending, RCTBubblingEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onStart, RCTBubblingEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onStreamError, RCTBubblingEventBlock);
-RCT_EXPORT_VIEW_PROPERTY(onStop, RCTBubblingEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onStreamingStopped, RCTBubblingEventBlock);
 
 @end

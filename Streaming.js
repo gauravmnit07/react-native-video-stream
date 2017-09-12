@@ -26,7 +26,7 @@ class Stream extends Component {
 		this._onPending = this._onPending.bind(this);
 		this._onStart = this._onStart.bind(this);
 		this._onStreamError = this._onStreamError.bind(this);
-		this._onStop = this._onStop.bind(this);
+		this._onStreamingStopped = this._onStreamingStopped.bind(this);
 	}
 
 	static propTypes = {
@@ -53,7 +53,7 @@ class Stream extends Component {
 		onPending: PropTypes.func,
 		onStart: PropTypes.func,
 		onStreamError: PropTypes.func,
-		onStop: PropTypes.func,
+		onStreamingStopped: PropTypes.func,
 		...View.propTypes,
 	}
 
@@ -77,8 +77,8 @@ class Stream extends Component {
 		this.props.onStreamError && this.props.onStreamError(event.nativeEvent);
 	}
 
-	_onStop(event) {
-		this.props.onStop && this.props.onStop(event.nativeEvent);
+	_onStreamingStopped(event) {
+		this.props.onStreamingStopped && this.props.onStreamingStopped(event.nativeEvent);
 	}
 
 	render() {
@@ -104,7 +104,7 @@ class Stream extends Component {
 			onPending: this._onPending,
 			onStart: this._onStart,
 			onStreamError: this._onStreamError,
-			onStop: this._onStop,
+			onStreamingStopped: this._onStreamingStopped,
 			...this.props,
 			style: {
 				...style
