@@ -8,6 +8,7 @@
 
 #import "LFLiveAudioConfiguration.h"
 #import <sys/utsname.h>
+#import "LFDebug.h"
 
 @implementation LFLiveAudioConfiguration
 
@@ -139,7 +140,7 @@
 
 + (BOOL)isNewThaniPhone6 {
     NSString *device = [self deviceName];
-    NSLog(@"device %@", device);
+    LFDPRINT(@"device %@", device);
     if (device == nil) {
         return NO;
     }
@@ -148,11 +149,11 @@
         return NO;
     }
     NSString *model = [array objectAtIndex:0];
-    NSLog(@"model %@", model);
+    LFDPRINT(@"model %@", model);
     if ([model hasPrefix:@"iPhone"]) {
         NSString *str1 = [model substringFromIndex:[@"iPhone" length]];
         NSUInteger num = [str1 integerValue];
-        NSLog(@"num %lu", (unsigned long)num);
+        LFDPRINT(@"num %lu", (unsigned long)num);
         if (num > 7) {
             return YES;
         }

@@ -12,6 +12,7 @@
 #import "LFAVEncoder.h"
 #import "LFH264VideoEncoder.h"
 #import "LFVideoFrame.h"
+#import "LFDebug.h"
 
 @interface LFH264VideoEncoder() {
     FILE *fp;
@@ -42,7 +43,7 @@
 #pragma mark -- LifeCycle
 - (instancetype)initWithVideoStreamConfiguration:(LFLiveVideoConfiguration *)configuration {
     if (self = [super init]) {
-        NSLog(@"USE LF264VideoEncoder");
+        LFDPRINT(@"USE LF264VideoEncoder");
         _configuration = configuration;
         [self initCompressionSession];
     }
@@ -221,14 +222,14 @@
     if (self.orphanedFrames.count > 0) {
         CMTime ptsDiff = CMTimeSubtract(pts, _lastPTS);
         NSUInteger orphanedFramesCount = self.orphanedFrames.count;
-//        NSLog(@"lastPTS before first orphaned frame: %lld", _lastPTS.value);
+//        LFDPRINT(@"lastPTS before first orphaned frame: %lld", _lastPTS.value);
         for (NSData *frame in self.orphanedFrames) {
             CMTime fakePTSDiff = CMTimeMultiplyByFloat64(ptsDiff, 1.0/(orphanedFramesCount + 1));
             CMTime fakePTS = CMTimeAdd(_lastPTS, fakePTSDiff);
-//            NSLog(@"orphan frame fakePTS: %lld", fakePTS.value);
+//            LFDPRINT(@"orphan frame fakePTS: %lld", fakePTS.value);
             [self writeVideoFrames:@[frame] pts:fakePTS];
         }
-//        NSLog(@"pts after orphaned frame: %lld", pts.value);
+//        LFDPRINT(@"pts after orphaned frame: %lld", pts.value);
         [self.orphanedFrames removeAllObjects];
     }
     
@@ -247,7 +248,7 @@
 
 - (void)initForFilePath {
     char *path = [self GetFilePathByfileName:"IOSCamDemo.h264"];
-    NSLog(@"%s", path);
+    LFDPRINT(@"%s", path);
     self->fp = fopen(path, "wb");
 }
 

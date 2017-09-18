@@ -5,6 +5,7 @@
 #import "GPUImageThresholdedNonMaximumSuppressionFilter.h"
 #import "GPUImageColorPackingFilter.h"
 #import "GPUImageGaussianBlurFilter.h"
+#import "GPUDebug.h"
 
 @interface GPUImageHarrisCornerDetectionFilter()
 
@@ -162,7 +163,7 @@ NSString *const kGPUImageHarrisCornerDetectionFragmentShaderString = SHADER_STRI
 //    __unsafe_unretained GPUImageHarrisCornerDetectionFilter *weakSelf = self;
 //    weakFilter = colorPackingFilter;
 //    [colorPackingFilter setFrameProcessingCompletionBlock:^(GPUImageOutput *filter, CMTime frameTime){
-//        NSLog(@"Triggered response from compaction filter");
+//        GPUDPRINT(@"Triggered response from compaction filter");
 //        
 //        UIImage *intermediateImage = [weakFilter imageFromCurrentlyProcessedOutput];
 //        [weakIntermediateImages addObject:intermediateImage];
@@ -246,7 +247,7 @@ NSString *const kGPUImageHarrisCornerDetectionFragmentShaderString = SHADER_STRI
     }
     
     CFAbsoluteTime currentFrameTime = (CFAbsoluteTimeGetCurrent() - startTime);
-    NSLog(@"Processing time : %f ms", 1000.0 * currentFrameTime);
+    GPUDPRINT(@"Processing time : %f ms", 1000.0 * currentFrameTime);
 
     if (cornersDetectedBlock != NULL)
     {

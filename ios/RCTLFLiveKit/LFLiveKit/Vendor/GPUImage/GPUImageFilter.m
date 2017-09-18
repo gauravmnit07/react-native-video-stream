@@ -1,6 +1,7 @@
 #import "GPUImageFilter.h"
 #import "GPUImagePicture.h"
 #import <AVFoundation/AVFoundation.h>
+#import "GPUDebug.h"
 
 // Hardcode the vertex shader for standard filters, but this can be overridden
 NSString *const kGPUImageVertexShaderString = SHADER_STRING
@@ -85,11 +86,11 @@ NSString *const kGPUImagePassthroughFragmentShaderString = SHADER_STRING
             if (![filterProgram link])
             {
                 NSString *progLog = [filterProgram programLog];
-                NSLog(@"Program link log: %@", progLog);
+                GPUDPRINT(@"Program link log: %@", progLog);
                 NSString *fragLog = [filterProgram fragmentShaderLog];
-                NSLog(@"Fragment shader compile log: %@", fragLog);
+                GPUDPRINT(@"Fragment shader compile log: %@", fragLog);
                 NSString *vertLog = [filterProgram vertexShaderLog];
-                NSLog(@"Vertex shader compile log: %@", vertLog);
+                GPUDPRINT(@"Vertex shader compile log: %@", vertLog);
                 filterProgram = nil;
                 NSAssert(NO, @"Filter shader link failed");
             }

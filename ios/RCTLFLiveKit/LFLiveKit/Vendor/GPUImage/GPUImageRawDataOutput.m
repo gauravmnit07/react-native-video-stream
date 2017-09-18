@@ -4,6 +4,7 @@
 #import "GLProgram.h"
 #import "GPUImageFilter.h"
 #import "GPUImageMovieWriter.h"
+#import "GPUDebug.h"
 
 @interface GPUImageRawDataOutput ()
 {
@@ -67,11 +68,11 @@
         if (![dataProgram link])
         {
             NSString *progLog = [dataProgram programLog];
-            NSLog(@"Program link log: %@", progLog);
+            GPUDPRINT(@"Program link log: %@", progLog);
             NSString *fragLog = [dataProgram fragmentShaderLog];
-            NSLog(@"Fragment shader compile log: %@", fragLog);
+            GPUDPRINT(@"Fragment shader compile log: %@", fragLog);
             NSString *vertLog = [dataProgram vertexShaderLog];
-            NSLog(@"Vertex shader compile log: %@", vertLog);
+            GPUDPRINT(@"Vertex shader compile log: %@", vertLog);
             dataProgram = nil;
             NSAssert(NO, @"Filter shader link failed");
         }
@@ -145,18 +146,18 @@
 - (GPUByteColorVector)colorAtLocation:(CGPoint)locationInImage;
 {
     GPUByteColorVector *imageColorBytes = (GPUByteColorVector *)self.rawBytesForImage;
-//    NSLog(@"Row start");
+//    GPUDPRINT(@"Row start");
 //    for (unsigned int currentXPosition = 0; currentXPosition < (imageSize.width * 2.0); currentXPosition++)
 //    {
 //        GPUByteColorVector byteAtPosition = imageColorBytes[currentXPosition];
-//        NSLog(@"%d - %d, %d, %d", currentXPosition, byteAtPosition.red, byteAtPosition.green, byteAtPosition.blue);
+//        GPUDPRINT(@"%d - %d, %d, %d", currentXPosition, byteAtPosition.red, byteAtPosition.green, byteAtPosition.blue);
 //    }
-//    NSLog(@"Row end");
+//    GPUDPRINT(@"Row end");
     
 //    GPUByteColorVector byteAtOne = imageColorBytes[1];
 //    GPUByteColorVector byteAtWidth = imageColorBytes[(int)imageSize.width - 3];
 //    GPUByteColorVector byteAtHeight = imageColorBytes[(int)(imageSize.height - 1) * (int)imageSize.width];
-//    NSLog(@"Byte 1: %d, %d, %d, byte 2: %d, %d, %d, byte 3: %d, %d, %d", byteAtOne.red, byteAtOne.green, byteAtOne.blue, byteAtWidth.red, byteAtWidth.green, byteAtWidth.blue, byteAtHeight.red, byteAtHeight.green, byteAtHeight.blue);
+//    GPUDPRINT(@"Byte 1: %d, %d, %d, byte 2: %d, %d, %d, byte 3: %d, %d, %d", byteAtOne.red, byteAtOne.green, byteAtOne.blue, byteAtWidth.red, byteAtWidth.green, byteAtWidth.blue, byteAtHeight.red, byteAtHeight.green, byteAtHeight.blue);
     
     CGPoint locationToPickFrom = CGPointZero;
     locationToPickFrom.x = MIN(MAX(locationInImage.x, 0.0), (imageSize.width - 1.0));

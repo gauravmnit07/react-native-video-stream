@@ -1,4 +1,5 @@
 #import "GPUImageHistogramFilter.h"
+#import "GPUDebug.h"
 
 // Unlike other filters, this one uses a grid of GL_POINTs to sample the incoming image in a grid. A custom vertex shader reads the color in the texture at its position 
 // and outputs a bin position in the final histogram as the vertex position. That point is then written into the image of the histogram using translucent pixels.
@@ -155,11 +156,11 @@ NSString *const kGPUImageHistogramAccumulationFragmentShaderString = SHADER_STRI
                     if (![secondFilterProgram link])
                     {
                         NSString *progLog = [secondFilterProgram programLog];
-                        NSLog(@"Program link log: %@", progLog);
+                        GPUDPRINT(@"Program link log: %@", progLog);
                         NSString *fragLog = [secondFilterProgram fragmentShaderLog];
-                        NSLog(@"Fragment shader compile log: %@", fragLog);
+                        GPUDPRINT(@"Fragment shader compile log: %@", fragLog);
                         NSString *vertLog = [secondFilterProgram vertexShaderLog];
-                        NSLog(@"Vertex shader compile log: %@", vertLog);
+                        GPUDPRINT(@"Vertex shader compile log: %@", vertLog);
                         filterProgram = nil;
                         NSAssert(NO, @"Filter shader link failed");
 
@@ -172,11 +173,11 @@ NSString *const kGPUImageHistogramAccumulationFragmentShaderString = SHADER_STRI
                     if (![thirdFilterProgram link])
                     {
                         NSString *progLog = [secondFilterProgram programLog];
-                        NSLog(@"Program link log: %@", progLog);
+                        GPUDPRINT(@"Program link log: %@", progLog);
                         NSString *fragLog = [secondFilterProgram fragmentShaderLog];
-                        NSLog(@"Fragment shader compile log: %@", fragLog);
+                        GPUDPRINT(@"Fragment shader compile log: %@", fragLog);
                         NSString *vertLog = [secondFilterProgram vertexShaderLog];
-                        NSLog(@"Vertex shader compile log: %@", vertLog);
+                        GPUDPRINT(@"Vertex shader compile log: %@", vertLog);
                         filterProgram = nil;
                         NSAssert(NO, @"Filter shader link failed");
                     }

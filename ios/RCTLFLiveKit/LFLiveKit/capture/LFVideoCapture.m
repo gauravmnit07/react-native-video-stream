@@ -10,6 +10,7 @@
 #import "GPUImage.h"
 #import "LFGPUImageBeautyFilter.h"
 #import "LFGPUImageEmptyFilter.h"
+#import "LFDebug.h"
 
 @interface LFVideoCapture ()
 
@@ -146,11 +147,11 @@
                 [self.videoCamera.inputCamera unlockForConfiguration];
                 ret = (self.videoCamera.inputCamera.torchMode == AVCaptureTorchModeOn);
             } else {
-                NSLog(@"Error while locking device for torch: %@", err);
+                LFDPRINT(@"Error while locking device for torch: %@", err);
                 ret = false;
             }
         } else {
-            NSLog(@"Torch not available in current camera input");
+            LFDPRINT(@"Torch not available in current camera input");
         }
     }
     [session commitConfiguration];
@@ -335,7 +336,7 @@
 }
 
 - (void)statusBarChanged:(NSNotification *)notification {
-    NSLog(@"UIApplicationWillChangeStatusBarOrientationNotification. UserInfo: %@", notification.userInfo);
+    LFDPRINT(@"UIApplicationWillChangeStatusBarOrientationNotification. UserInfo: %@", notification.userInfo);
     UIInterfaceOrientation statusBar = [[UIApplication sharedApplication] statusBarOrientation];
     if (self.configuration.landscape) {
         if (statusBar == UIInterfaceOrientationLandscapeLeft) {

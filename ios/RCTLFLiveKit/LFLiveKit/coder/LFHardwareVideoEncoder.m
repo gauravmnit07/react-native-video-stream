@@ -8,6 +8,7 @@
 
 #import "LFHardwareVideoEncoder.h"
 #import <VideoToolbox/VideoToolbox.h>
+#import "LFDebug.h"
 
 @interface LFHardwareVideoEncoder (){
     VTCompressionSessionRef compressionSession;
@@ -30,7 +31,7 @@
 #pragma mark -- LifeCycle
 - (instancetype)initWithVideoStreamConfiguration:(LFLiveVideoConfiguration *)configuration {
     if (self = [super init]) {
-        NSLog(@"USE LFHardwareVideoEncoder");
+        LFDPRINT(@"USE LFHardwareVideoEncoder");
         _configuration = configuration;
         [self initCompressionSession];
 
@@ -227,7 +228,7 @@ static void VideoCompressonOutputCallback(void *VTref, void *VTFrameRef, OSStatu
 
 - (void)initForFilePath {
     char *path = [self GetFilePathByfileName:"IOSCamDemo_HW.h264"];
-    NSLog(@"%s", path);
+    LFDPRINT(@"%s", path);
     self->fp = fopen(path, "wb");
 }
 

@@ -1,4 +1,5 @@
 #import "GPUImageFilterPipeline.h"
+#import "GPUDebug.h"
 
 @interface GPUImageFilterPipeline ()
 
@@ -20,7 +21,7 @@
         self.input = input;
         self.output = output;
         if (![self _parseConfiguration:configuration]) {
-            NSLog(@"Sorry, a parsing error occurred.");
+            GPUDPRINT(@"Sorry, a parsing error occurred.");
             abort();
         }
         [self _refreshFilters];

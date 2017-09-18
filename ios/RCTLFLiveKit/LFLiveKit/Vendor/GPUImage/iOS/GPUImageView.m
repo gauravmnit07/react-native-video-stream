@@ -4,6 +4,7 @@
 #import "GPUImageContext.h"
 #import "GPUImageFilter.h"
 #import <AVFoundation/AVFoundation.h>
+#import "GPUDebug.h"
 
 #pragma mark -
 #pragma mark Private methods and instance variables
@@ -106,11 +107,11 @@
             if (![displayProgram link])
             {
                 NSString *progLog = [displayProgram programLog];
-                NSLog(@"Program link log: %@", progLog);
+                GPUDPRINT(@"Program link log: %@", progLog);
                 NSString *fragLog = [displayProgram fragmentShaderLog];
-                NSLog(@"Fragment shader compile log: %@", fragLog);
+                GPUDPRINT(@"Fragment shader compile log: %@", fragLog);
                 NSString *vertLog = [displayProgram vertexShaderLog];
-                NSLog(@"Vertex shader compile log: %@", vertLog);
+                GPUDPRINT(@"Vertex shader compile log: %@", vertLog);
                 displayProgram = nil;
                 NSAssert(NO, @"Filter shader link failed");
             }
@@ -181,7 +182,7 @@
     _sizeInPixels.width = (CGFloat)backingWidth;
     _sizeInPixels.height = (CGFloat)backingHeight;
 
-//    NSLog(@"Backing width: %d, height: %d", backingWidth, backingHeight);
+//    GPUDPRINT(@"Backing width: %d, height: %d", backingWidth, backingHeight);
 
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, displayRenderbuffer);
 	

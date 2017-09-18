@@ -1,5 +1,6 @@
 #import "GPUImageFramebuffer.h"
 #import "GPUImageOutput.h"
+#import "GPUDebug.h"
 
 @interface GPUImageFramebuffer()
 {
@@ -152,7 +153,7 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size);
             CVReturn err = CVPixelBufferCreate(kCFAllocatorDefault, (int)_size.width, (int)_size.height, kCVPixelFormatType_32BGRA, attrs, &renderTarget);
             if (err)
             {
-                NSLog(@"FBO size: %f, %f", _size.width, _size.height);
+                GPUDPRINT(@"FBO size: %f, %f", _size.width, _size.height);
                 NSAssert(NO, @"Error at CVPixelBufferCreate %d", err);
             }
             
@@ -450,7 +451,7 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size)
 
 - (GLuint)texture;
 {
-//    NSLog(@"Accessing texture: %d from FB: %@", _texture, self);
+//    GPUDPRINT(@"Accessing texture: %d from FB: %@", _texture, self);
     return _texture;
 }
 

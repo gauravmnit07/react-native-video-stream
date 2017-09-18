@@ -7,6 +7,7 @@
 //
 
 #import "LFHardwareAudioEncoder.h"
+#import "LFDebug.h"
 
 @interface LFHardwareAudioEncoder (){
     AudioConverterRef m_converter;
@@ -21,7 +22,7 @@
 
 - (instancetype)initWithAudioStreamConfiguration:(LFLiveAudioConfiguration *)configuration {
     if (self = [super init]) {
-        NSLog(@"USE LFHardwareAudioEncoder");
+        LFDPRINT(@"USE LFHardwareAudioEncoder");
         _configuration = configuration;
     }
     return self;

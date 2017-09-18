@@ -1,4 +1,5 @@
 #import "GPUImageTwoPassFilter.h"
+#import "GPUDebug.h"
 
 @implementation GPUImageTwoPassFilter
 
@@ -26,11 +27,11 @@
             if (![secondFilterProgram link])
             {
                 NSString *progLog = [secondFilterProgram programLog];
-                NSLog(@"Program link log: %@", progLog);
+                GPUDPRINT(@"Program link log: %@", progLog);
                 NSString *fragLog = [secondFilterProgram fragmentShaderLog];
-                NSLog(@"Fragment shader compile log: %@", fragLog);
+                GPUDPRINT(@"Fragment shader compile log: %@", fragLog);
                 NSString *vertLog = [secondFilterProgram vertexShaderLog];
-                NSLog(@"Vertex shader compile log: %@", vertLog);
+                GPUDPRINT(@"Vertex shader compile log: %@", vertLog);
                 secondFilterProgram = nil;
                 NSAssert(NO, @"Filter shader link failed");
             }

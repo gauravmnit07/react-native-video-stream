@@ -1,6 +1,7 @@
 //  adapted from unitzeroone - http://unitzeroone.com/labs/jfavoronoi/
 
 #import "GPUImageJFAVoronoiFilter.h"
+#import "GPUDebug.h"
 
 //  The shaders are mostly taken from UnitZeroOne's WebGL example here:
 //  http://unitzeroone.com/blog/2011/03/22/jump-flood-voronoi-for-webgl/
@@ -328,7 +329,7 @@ NSString *const kGPUImageJFAVoronoiFragmentShaderString = SHADER_STRING
     if (!(self = [super initWithVertexShaderFromString:kGPUImageJFAVoronoiVertexShaderString fragmentShaderFromString:kGPUImageJFAVoronoiFragmentShaderString]))
     {
         
-        NSLog(@"nil returned");
+        GPUDPRINT(@"nil returned");
 		return nil;
         
     }
@@ -349,11 +350,11 @@ NSString *const kGPUImageJFAVoronoiFragmentShaderString = SHADER_STRING
     float height = log2(sizeInPixels.height);
     
     if (width != height) {
-        NSLog(@"Voronoi point texture must be square");
+        GPUDPRINT(@"Voronoi point texture must be square");
         return;
     }
     if (width != floor(width) || height != floor(height)) {
-        NSLog(@"Voronoi point texture must be a power of 2.  Texture size: %f, %f", sizeInPixels.width, sizeInPixels.height);
+        GPUDPRINT(@"Voronoi point texture must be a power of 2.  Texture size: %f, %f", sizeInPixels.width, sizeInPixels.height);
         return;
     }
     glUniform2f(sizeUniform, _sizeInPixels.width, _sizeInPixels.height);

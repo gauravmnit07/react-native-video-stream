@@ -1,4 +1,5 @@
 #import "GPUImageGaussianBlurFilter.h"
+#import "GPUDebug.h"
 
 @implementation GPUImageGaussianBlurFilter
 
@@ -45,7 +46,7 @@
         return kGPUImageVertexShaderString;
     }
     
-//    NSLog(@"Max varyings: %d", [GPUImageContext maximumVaryingVectorsForThisDevice]);
+//    GPUDPRINT(@"Max varyings: %d", [GPUImageContext maximumVaryingVectorsForThisDevice]);
     NSMutableString *shaderString = [[NSMutableString alloc] init];
 
     // Header
@@ -392,11 +393,11 @@
             if (![filterProgram link])
             {
                 NSString *progLog = [filterProgram programLog];
-                NSLog(@"Program link log: %@", progLog);
+                GPUDPRINT(@"Program link log: %@", progLog);
                 NSString *fragLog = [filterProgram fragmentShaderLog];
-                NSLog(@"Fragment shader compile log: %@", fragLog);
+                GPUDPRINT(@"Fragment shader compile log: %@", fragLog);
                 NSString *vertLog = [filterProgram vertexShaderLog];
-                NSLog(@"Vertex shader compile log: %@", vertLog);
+                GPUDPRINT(@"Vertex shader compile log: %@", vertLog);
                 filterProgram = nil;
                 NSAssert(NO, @"Filter shader link failed");
             }
@@ -421,11 +422,11 @@
             if (![secondFilterProgram link])
             {
                 NSString *progLog = [secondFilterProgram programLog];
-                NSLog(@"Program link log: %@", progLog);
+                GPUDPRINT(@"Program link log: %@", progLog);
                 NSString *fragLog = [secondFilterProgram fragmentShaderLog];
-                NSLog(@"Fragment shader compile log: %@", fragLog);
+                GPUDPRINT(@"Fragment shader compile log: %@", fragLog);
                 NSString *vertLog = [secondFilterProgram vertexShaderLog];
-                NSLog(@"Vertex shader compile log: %@", vertLog);
+                GPUDPRINT(@"Vertex shader compile log: %@", vertLog);
                 secondFilterProgram = nil;
                 NSAssert(NO, @"Filter shader link failed");
             }
@@ -479,13 +480,13 @@
             calculatedSampleRadius += calculatedSampleRadius % 2; // There's nothing to gain from handling odd radius sizes, due to the optimizations I use
         }
         
-//        NSLog(@"Blur radius: %f, calculated sample radius: %d", _blurRadiusInPixels, calculatedSampleRadius);
+//        GPUDPRINT(@"Blur radius: %f, calculated sample radius: %d", _blurRadiusInPixels, calculatedSampleRadius);
 //        
         NSString *newGaussianBlurVertexShader = [[self class] vertexShaderForOptimizedBlurOfRadius:calculatedSampleRadius sigma:_blurRadiusInPixels];
         NSString *newGaussianBlurFragmentShader = [[self class] fragmentShaderForOptimizedBlurOfRadius:calculatedSampleRadius sigma:_blurRadiusInPixels];
 
-//        NSLog(@"Optimized vertex shader: \n%@", newGaussianBlurVertexShader);
-//        NSLog(@"Optimized fragment shader: \n%@", newGaussianBlurFragmentShader);
+//        GPUDPRINT(@"Optimized vertex shader: \n%@", newGaussianBlurVertexShader);
+//        GPUDPRINT(@"Optimized fragment shader: \n%@", newGaussianBlurFragmentShader);
 //        
         [self switchToVertexShader:newGaussianBlurVertexShader fragmentShader:newGaussianBlurFragmentShader];
     }

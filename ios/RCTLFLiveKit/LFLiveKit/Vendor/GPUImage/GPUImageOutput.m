@@ -1,6 +1,7 @@
 #import "GPUImageOutput.h"
 #import "GPUImageMovieWriter.h"
 #import "GPUImagePicture.h"
+#import "GPUDebug.h"
 #import <mach/mach.h>
 
 dispatch_queue_attr_t GPUImageDefaultQueueAttribute(void)
@@ -121,9 +122,9 @@ void reportAvailableMemoryForGPUImage(NSString *tag)
                                    
                                    &size);    
     if( kerr == KERN_SUCCESS ) {        
-        NSLog(@"%@ - Memory used: %u", tag, (unsigned int)info.resident_size); //in bytes
+        GPUDPRINT(@"%@ - Memory used: %u", tag, (unsigned int)info.resident_size); //in bytes
     } else {        
-        NSLog(@"%@ - Error: %s", tag, mach_error_string(kerr));        
+        GPUDPRINT(@"%@ - Error: %s", tag, mach_error_string(kerr));        
     }    
 }
 

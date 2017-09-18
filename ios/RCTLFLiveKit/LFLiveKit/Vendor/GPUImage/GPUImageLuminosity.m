@@ -1,4 +1,5 @@
 #import "GPUImageLuminosity.h"
+#import "GPUDebug.h"
 
 #if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
 NSString *const kGPUImageInitialLuminosityFragmentShaderString = SHADER_STRING
@@ -136,11 +137,11 @@ NSString *const kGPUImageLuminosityFragmentShaderString = SHADER_STRING
             if (![secondFilterProgram link])
             {
                 NSString *progLog = [secondFilterProgram programLog];
-                NSLog(@"Program link log: %@", progLog);
+                GPUDPRINT(@"Program link log: %@", progLog);
                 NSString *fragLog = [secondFilterProgram fragmentShaderLog];
-                NSLog(@"Fragment shader compile log: %@", fragLog);
+                GPUDPRINT(@"Fragment shader compile log: %@", fragLog);
                 NSString *vertLog = [secondFilterProgram vertexShaderLog];
-                NSLog(@"Vertex shader compile log: %@", vertLog);
+                GPUDPRINT(@"Vertex shader compile log: %@", vertLog);
                 filterProgram = nil;
                 NSAssert(NO, @"Filter shader link failed");
             }
@@ -261,7 +262,7 @@ NSString *const kGPUImageLuminosityFragmentShaderString = SHADER_STRING
 //            currentAlphaTotal += (CGFloat)rawImagePixels2[(currentPixel * 4) + 3] / 255.0f;
 //        }
 //
-//        NSLog(@"Stage %d average image red: %f, green: %f, blue: %f, alpha: %f", currentStage, currentRedTotal / (CGFloat)totalNumberOfPixels, currentGreenTotal / (CGFloat)totalNumberOfPixels, currentBlueTotal / (CGFloat)totalNumberOfPixels, currentAlphaTotal / (CGFloat)totalNumberOfPixels);
+//        GPUDPRINT(@"Stage %d average image red: %f, green: %f, blue: %f, alpha: %f", currentStage, currentRedTotal / (CGFloat)totalNumberOfPixels, currentGreenTotal / (CGFloat)totalNumberOfPixels, currentBlueTotal / (CGFloat)totalNumberOfPixels, currentAlphaTotal / (CGFloat)totalNumberOfPixels);
 //
 //
 //        CGImageRef cgImageFromBytes = CGImageCreate((int)currentStageSize.width, (int)currentStageSize.height, 8, 32, 4 * (int)currentStageSize.width, defaultRGBColorSpace, kCGBitmapByteOrderDefault | kCGImageAlphaLast, dataProvider, NULL, NO, kCGRenderingIntentDefault);

@@ -9,6 +9,7 @@
 #import "LFAudioCapture.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
+#import "LFDebug.h"
 
 NSString *const LFAudioComponentFailedToCreateNotification = @"LFAudioComponentFailedToCreateNotification";
 
@@ -123,7 +124,7 @@ NSString *const LFAudioComponentFailedToCreateNotification = @"LFAudioComponentF
     if (_running) {
         dispatch_async(self.taskQueue, ^{
             self.isRunning = YES;
-            NSLog(@"MicrophoneSource: startRunning");
+            LFDPRINT(@"MicrophoneSource: startRunning");
             [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
             AudioOutputUnitStart(self.componetInstance);
         });
@@ -169,7 +170,7 @@ NSString *const LFAudioComponentFailedToCreateNotification = @"LFAudioComponentF
         seccReason = @"The reason for the change is unknown.";
         break;
     }
-    NSLog(@"handleRouteChange reason is %@", seccReason);
+    LFDPRINT(@"handleRouteChange reason is %@", seccReason);
 
     AVAudioSessionPortDescription *input = [[session.currentRoute.inputs count] ? session.currentRoute.inputs : nil objectAtIndex:0];
     if (input.portType == AVAudioSessionPortHeadsetMic) {
@@ -186,7 +187,7 @@ NSString *const LFAudioComponentFailedToCreateNotification = @"LFAudioComponentF
         if (reason == AVAudioSessionInterruptionTypeBegan) {
             if (self.isRunning) {
                 dispatch_sync(self.taskQueue, ^{
-                    NSLog(@"MicrophoneSource: stopRunning");
+                    LFDPRINT(@"MicrophoneSource: stopRunning");
                     AudioOutputUnitStop(self.componetInstance);
                 });
             }
@@ -199,7 +200,7 @@ NSString *const LFAudioComponentFailedToCreateNotification = @"LFAudioComponentF
             case AVAudioSessionInterruptionOptionShouldResume:
                 if (self.isRunning) {
                     dispatch_async(self.taskQueue, ^{
-                        NSLog(@"MicrophoneSource: stopRunning");
+                        LFDPRINT(@"MicrophoneSource: stopRunning");
                         AudioOutputUnitStart(self.componetInstance);
                     });
                 }
@@ -212,7 +213,7 @@ NSString *const LFAudioComponentFailedToCreateNotification = @"LFAudioComponentF
 
     }
     ;
-    NSLog(@"handleInterruption: %@ reason %@", [notification name], reasonStr);
+    LFDPRINT(@"handleInterruption: %@ reason %@", [notification name], reasonStr);
 }
 
 #pragma mark -- CallBack
@@ -244,7 +245,7 @@ static OSStatus handleInputBuffer(void *inRefCon,
 
         if (!source.isRunning) {
             dispatch_sync(source.taskQueue, ^{
-                NSLog(@"MicrophoneSource: stopRunning");
+                LFDPRINT(@"MicrophoneSource: stopRunning");
                 AudioOutputUnitStop(source.componetInstance);
             });
 

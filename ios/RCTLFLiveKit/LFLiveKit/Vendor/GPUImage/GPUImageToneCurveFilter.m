@@ -1,4 +1,5 @@
 #import "GPUImageToneCurveFilter.h"
+#import "GPUDebug.h"
 
 #pragma mark -
 #pragma mark GPUImageACVFile Helper
@@ -40,7 +41,7 @@ unsigned short int16WithBytes(Byte* bytes);
     {
         if (data.length == 0)
         {
-            NSLog(@"failed to init ACVFile with data:%@", data);
+            GPUDPRINT(@"failed to init ACVFile with data:%@", data);
             
             return self;
         }

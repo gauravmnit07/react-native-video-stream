@@ -147,7 +147,6 @@
 #pragma mark -- LFStreamingSessionDelegate
 /** live status changed will callback */
 - (void)liveSession:(nullable LFLiveSession *)session liveStateDidChange:(LFLiveState)state {
-    NSLog(@"liveStateDidChange: %ld", state);
     switch (state) {
         case LFLiveReady:
             self.onReady(@{@"target": self.reactTag});
@@ -171,9 +170,7 @@
 
 #pragma mark -- Getter Setter
 - (LFLiveSession *)session {
-    NSLog(@"Session 호출");
     if (!_session) {
-        NSLog(@"Session 생성");
         /**      发现大家有不会用横屏的请注意啦，横屏需要在ViewController  supportedInterfaceOrientations修改方向  默认竖屏  ****/
         /**      发现大家有不会用横屏的请注意啦，横屏需要在ViewController  supportedInterfaceOrientations修改方向  默认竖屏  ****/
         /**      发现大家有不会用横屏的请注意啦，横屏需要在ViewController  supportedInterfaceOrientations修改方向  默认竖屏  ****/

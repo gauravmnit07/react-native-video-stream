@@ -4,6 +4,8 @@
 
 
 #import "GLProgram.h"
+#import "GPUDebug.h"
+
 // START:typedefs
 #pragma mark Function Pointer Definitions
 typedef void (*GLInfoFunction)(GLuint program, GLenum pname, GLint* params);
@@ -41,7 +43,7 @@ typedef void (*GLLogFunction) (GLuint program, GLsizei bufsize, GLsizei* length,
                             type:GL_VERTEX_SHADER 
                           string:vShaderString])
         {
-            NSLog(@"Failed to compile vertex shader");
+            GPUDPRINT(@"Failed to compile vertex shader");
         }
         
         // Create and compile fragment shader
@@ -49,7 +51,7 @@ typedef void (*GLLogFunction) (GLuint program, GLsizei bufsize, GLsizei* length,
                             type:GL_FRAGMENT_SHADER 
                           string:fShaderString])
         {
-            NSLog(@"Failed to compile fragment shader");
+            GPUDPRINT(@"Failed to compile fragment shader");
         }
         
         glAttachShader(program, vertShader);
@@ -102,7 +104,7 @@ typedef void (*GLLogFunction) (GLuint program, GLsizei bufsize, GLsizei* length,
       (GLchar *)[shaderString UTF8String];
     if (!source)
     {
-        NSLog(@"Failed to load vertex shader");
+        GPUDPRINT(@"Failed to load vertex shader");
         return NO;
     }
     
@@ -134,7 +136,7 @@ typedef void (*GLLogFunction) (GLuint program, GLsizei bufsize, GLsizei* length,
 	}	
 	
 //    CFAbsoluteTime linkTime = (CFAbsoluteTimeGetCurrent() - startTime);
-//    NSLog(@"Compiled in %f ms", linkTime * 1000.0);
+//    GPUDPRINT(@"Compiled in %f ms", linkTime * 1000.0);
 
     return status == GL_TRUE;
 }
@@ -190,7 +192,7 @@ typedef void (*GLLogFunction) (GLuint program, GLsizei bufsize, GLsizei* length,
     self.initialized = YES;
 
 //    CFAbsoluteTime linkTime = (CFAbsoluteTimeGetCurrent() - startTime);
-//    NSLog(@"Linked in %f ms", linkTime * 1000.0);
+//    GPUDPRINT(@"Linked in %f ms", linkTime * 1000.0);
 
     return YES;
 }

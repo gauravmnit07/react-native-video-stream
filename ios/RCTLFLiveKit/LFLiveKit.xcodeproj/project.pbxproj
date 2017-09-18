@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7EFB91241F6FEBA2005C42E9 /* LFDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EFB91231F6FEBA2005C42E9 /* LFDebug.h */; };
+		7EFB91261F6FED2D005C42E9 /* GPUDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EFB91251F6FED2D005C42E9 /* GPUDebug.h */; };
 		84001FF71D0017590026C63F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84001FF61D0017590026C63F /* AVFoundation.framework */; };
 		84001FF91D00175D0026C63F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84001FF81D00175D0026C63F /* Foundation.framework */; };
 		84001FFB1D0017630026C63F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84001FFA1D0017630026C63F /* UIKit.framework */; };
@@ -428,6 +430,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7EFB91231F6FEBA2005C42E9 /* LFDebug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFDebug.h; sourceTree = "<group>"; };
+		7EFB91251F6FED2D005C42E9 /* GPUDebug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GPUDebug.h; sourceTree = "<group>"; };
 		84001F8A1D0015D10026C63F /* LFLiveKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LFLiveKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84001F991D0015D10026C63F /* LFLiveKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFLiveKitTests.m; sourceTree = "<group>"; };
 		84001F9B1D0015D10026C63F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -919,6 +923,7 @@
 				956971C21D5DCC2000FF600F /* LFLiveKit.h */,
 				956971C31D5DCC2000FF600F /* LFLiveSession.h */,
 				956971C41D5DCC2000FF600F /* LFLiveSession.m */,
+				7EFB91231F6FEBA2005C42E9 /* LFDebug.h */,
 				956971C51D5DCC2000FF600F /* objects */,
 				956971D01D5DCC2000FF600F /* publish */,
 				956971D81D5DCC2000FF600F /* Vendor */,
@@ -1369,6 +1374,7 @@
 				956973261D5DCC2100FF600F /* GPUImageXYDerivativeFilter.m */,
 				956973271D5DCC2100FF600F /* GPUImageZoomBlurFilter.h */,
 				956973281D5DCC2100FF600F /* GPUImageZoomBlurFilter.m */,
+				7EFB91251F6FED2D005C42E9 /* GPUDebug.h */,
 				956973291D5DCC2100FF600F /* iOS */,
 			);
 			path = GPUImage;
@@ -1453,6 +1459,7 @@
 				956973CC1D5DCC2100FF600F /* GPUImageErosionFilter.h in Headers */,
 				956973741D5DCC2100FF600F /* LFStreamRTMPSocket.h in Headers */,
 				956974001D5DCC2100FF600F /* GPUImageHistogramGenerator.h in Headers */,
+				7EFB91261F6FED2D005C42E9 /* GPUDebug.h in Headers */,
 				956973A41D5DCC2100FF600F /* GPUImageColorConversion.h in Headers */,
 				9569737C1D5DCC2100FF600F /* GPUImage3x3ConvolutionFilter.h in Headers */,
 				956974761D5DCC2100FF600F /* GPUImageSepiaFilter.h in Headers */,
@@ -1509,6 +1516,7 @@
 				956974B61D5DCC2100FF600F /* GPUImageUIElement.h in Headers */,
 				9569749A1D5DCC2100FF600F /* GPUImageTextureInput.h in Headers */,
 				956974661D5DCC2100FF600F /* GPUImageRGBClosingFilter.h in Headers */,
+				7EFB91241F6FEBA2005C42E9 /* LFDebug.h in Headers */,
 				956974161D5DCC2100FF600F /* GPUImageLevelsFilter.h in Headers */,
 				956974741D5DCC2100FF600F /* GPUImageScreenBlendFilter.h in Headers */,
 				956973511D5DCC2100FF600F /* LFVideoEncoder.h in Headers */,
@@ -2018,7 +2026,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = LFLiveKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2051,7 +2059,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = LFLiveKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
