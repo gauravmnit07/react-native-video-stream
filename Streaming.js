@@ -105,6 +105,7 @@ class Stream extends Component {
 			onStart: this._onStart,
 			onStreamError: this._onStreamError,
 			onStreamingStopped: this._onStreamingStopped,
+			onStop: this._onStreamingStopped,
 			...this.props,
 			style: {
 				...style
